@@ -13,11 +13,11 @@ const store = {
   },
 
   current: {
-    id: null,
-    width: null,
     height: null,
+    id: null,
     u: null,
-    v: null
+    v: null,
+    width: null
   },
 
   parameters: {
@@ -37,14 +37,9 @@ const highlightMaterial = new THREE.MeshStandardMaterial({ color: '#FF2400', met
 const defaultMaterial = new THREE.MeshStandardMaterial({ color: '#818589', metalness: 0.5 })
 const wireframeMaterial = new THREE.MeshNormalMaterial({ color: 'white', wireframe: false })
 
-wireframeMaterial.polygonOffset = true;
-wireframeMaterial.polygonOffsetFactor = -0.5;
 
 init();
 animate();
-
-
-
 
 
 
@@ -58,11 +53,8 @@ function unique(value, index, array) {
  */
 
 function getCurrentShelf() {
-  return store.geometry.shelves.filter((item) => item.userData.id == store.current.id)[0]
-}
-
-function getPanels() {
-  return store.geometry.panels[store.current.size][0]
+  console.log(store.current)
+  return store.geometry.shelves.filter((item) => item.userData == store.current)[0]
 }
 
 
@@ -70,12 +62,6 @@ function init() {
 
   //Create ThreeJS scenes
   initMainScene()
-
-
-  //Initialise the window events for the UI
-  initUIEvents()
-
-
 
   //#region  Loader
   /**
@@ -102,7 +88,7 @@ function init() {
       store.parameters.u = shelves.map((item) => item.userData.u).filter(unique).sort((a, b) => a - b)
       store.parameters.v = shelves.map((item) => item.userData.v).filter(unique).sort((a, b) => a - b)
 
-      store.current = shelves[0]
+      store.current = shelves[0].userData
 
       shelves.forEach((item) => {
         if (item.name === 'shelf') {
@@ -111,6 +97,10 @@ function init() {
       })
 
       updateScene()
+
+
+      //Initialise the window events for the UI
+      initUIEvents()
     },
     function (obj) {
       progressLog(obj)
@@ -120,6 +110,9 @@ function init() {
     }
   )
   //#endregion
+
+
+
 
 }
 
@@ -168,7 +161,7 @@ function setCurrentShelf(id) {
   shelves = store.geometry.shelves
 
   try {
-    store.current = shelves.filter((shelf)=> shelf.userData.id === id)[0].userData
+    store.current = shelves.filter((shelf) => shelf.userData.id === id)[0].userData
   }
   catch (err) {
     console.log(`Cannot set ${id}!`)
@@ -208,7 +201,6 @@ function initMainScene() {
 
 function initUIEvents() {
 
-
   let prevSelection = null;
 
 
@@ -235,9 +227,6 @@ function initUIEvents() {
         prevSelection.material = defaultMaterial
 
       const object = intersects[0].object
-
-
-      // object.material = highlightMaterial
 
 
       switch (object.name) {
@@ -269,9 +258,6 @@ function initUIEvents() {
 
 
 
-      // console.log(intersects[0].object.userData)
-      // console.log(intersects[0].object)
-
       prevSelection = object
     }
   });
@@ -290,61 +276,110 @@ function initUIEvents() {
   }, false)
 
 
-  // document.getElementById("set-form").addEventListener("submit", function (e) {
-  //   e.preventDefault()
-
-  //   const values = e.target.elements['set'].value
-
-  //   try {
-  //     setGrid(JSON.parse(values))
-  //   }
-  //   catch (err) {
-  //     console.log(err)
-  //   }
-  // })
 
 
+  // Height dropdown
+  const heightDropdown = document.getElementById("height-dropdown")
+
+  store.parameters.height.map((param) => {
+    const option = document.createElement("option")
+    option.text = param
+    heightDropdown.add(option);
+  })
+
+  heightDropdown.addEventListener("change", function (e) {
+    e.preventDefault()
+
+    try {
+      store.current.height = e.target.value
+      updateScene()
+    }
+    catch (err) {
+      console.log(err)
+    }
+  })
 
 
-  // document.getElementById("button-option-next").addEventListener("click", function () {
-  //   if (currentPanel < getPanels().length) {
-  //     setCurrentPanel(currentPanel + 1)
-  //   }
-  //   else {
-  //     setCurrentPanel(0)
-  //   }
-  // })
+
+  // Height dropdown
+  const widthDropdown = document.getElementById("width-dropdown")
+
+  store.parameters.width.map((param) => {
+    const option = document.createElement("option")
+    option.text = param
+    widthDropdown.add(option);
+  })
+
+  widthDropdown.addEventListener("change", function (e) {
+    e.preventDefault()
+
+    try {
+      store.current.width = e.target.value
+      updateScene()
+    }
+    catch (err) {
+      console.log(err)
+    }
+  })
 
 
-  // document.getElementById("button-option-prev").addEventListener("click", function () {
-  //   if (currentPanel - 1 < 0) {
-  //     setCurrentPanel(getPanels().length - 1)
-  //   }
-  //   else {
-  //     setCurrentPanel(currentPanel - 1)
-  //   }
-  // })
+
+  // U dropdown
+  const uDropdown = document.getElementById("u-dropdown")
+
+  store.parameters.u.map((param) => {
+    const option = document.createElement("option")
+    option.text = param
+    uDropdown.add(option);
+  })
+
+  uDropdown.addEventListener("change", function (e) {
+    e.preventDefault()
+
+    try {
+      store.current.u = e.target.value
+      updateScene()
+    }
+    catch (err) {
+      console.log(err)
+    }
+  })
 
 
+  // V dropdown
+  const vDropdown = document.getElementById("v-dropdown")
+
+  store.parameters.v.map((param) => {
+    const option = document.createElement("option")
+    option.text = param
+    vDropdown.add(option);
+  })
+
+  vDropdown.addEventListener("change", function (e) {
+    e.preventDefault()
+
+    try {
+      store.current.v = e.target.value
+      updateScene()
+    }
+    catch (err) {
+      console.log(err)
+    }
+  })
 
 }
 
 
 function updateScene() {
 
-
   const prev = scene.children.filter((item) => item.name === "shelf")
-
   prev.forEach((shelf) => scene.remove(shelf))
 
   const shelf = getCurrentShelf()
 
+  console.log([shelf.userData, store.current])
+  // console.log(prev)
+
   shelf.material = defaultMaterial
-
-
   scene.add(shelf)
-  console.log(shelf)
-
 }
-
-
