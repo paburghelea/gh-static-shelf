@@ -6,8 +6,6 @@ let camera, controls, scene, renderer;
 
 
 const store = {
-  gridSize: null,
-
   geometry: {
     shelves: {},
   },
@@ -26,7 +24,6 @@ const store = {
     u: [],
     v: []
   }
-
 }
 
 
@@ -251,17 +248,13 @@ function initUIEvents() {
           break;
         }
 
-
         default:
           break;
       }
 
-
-
       prevSelection = object
     }
   });
-
 
 
   /**
@@ -274,7 +267,6 @@ function initUIEvents() {
     renderer.setSize(container.clientWidth, container.clientHeight)
 
   }, false)
-
 
 
 
@@ -366,9 +358,7 @@ function initUIEvents() {
       console.log(err)
     }
   })
-
 }
-
 
 function updateScene() {
 
@@ -378,7 +368,6 @@ function updateScene() {
   const shelf = getCurrentShelf()
 
   console.log([shelf.userData, store.current])
-  // console.log(prev)
 
   shelf.material = defaultMaterial
   scene.add(shelf)
