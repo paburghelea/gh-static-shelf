@@ -80,45 +80,11 @@ canvas:focus {
 
 
 
-#set-panel {
-    position: absolute;
-    left: 24px;
-    bottom: 24px;
-    width: 440px;
-}
-
 #grid-panel {
     position: absolute;
     right: 24px;
     top: 24px;
     width: 440px;
-}
-
-.button-chevron {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.152);
-    border-radius: 12px;
-    border: none;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-    padding: 7px;
-}
-
-
-.button-chevron:hover {
-    background: rgba(255, 255, 255, 0.23);
-}
-
-#button-container {
-    gap: 8px;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    padding-bottom: 18px;
 }
 
 .option-value {
@@ -138,20 +104,6 @@ label {
     width: 25%;
 }
 
-textarea {
-    background-color: rgba(20, 20, 20, 0.7);
-    border: solid 1px rgba(200, 200, 200, 0.1);
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.7);
-    padding: 8px;
-    position: relative;
-    width: max-content;
-    flex-grow: 1;
-    resize: none;
-}
-
-
-
 select {
     background-color: rgba(20, 20, 20, 0.7);
     border: solid 1px rgba(200, 200, 200, 0.1);
@@ -160,12 +112,6 @@ select {
     padding: 12px;
     height: 44px;
     flex-grow: 1;
-}
-
-#set-form {
-    display: flex;
-    width: 100%;
-    gap: 8px;
 }
 
 .center-vertical {
