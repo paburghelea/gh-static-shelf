@@ -26,13 +26,8 @@ const store = {
   }
 }
 
-
-let currentPanel = 0
-
 //Material used in the scene
-const highlightMaterial = new THREE.MeshStandardMaterial({ color: '#FF2400', metalness: 0.5 })
 const defaultMaterial = new THREE.MeshStandardMaterial({ color: '#818589', metalness: 0.5 })
-const wireframeMaterial = new THREE.MeshNormalMaterial({ color: 'white', wireframe: false })
 
 
 init();
@@ -55,7 +50,6 @@ function getCurrentShelf() {
     const a = item.userData
     const b = store.current
 
-
     if (
       a.width === b.width &&
       a.height === b.height &&
@@ -63,9 +57,9 @@ function getCurrentShelf() {
       a.v === b.v
     ) {
       console.log('Shelf found')
+      console.log(item)
       return item
     }
- 
   }
   console.log('Shelf not found')
   return store.geometry.shelves[0]
@@ -93,7 +87,6 @@ function init() {
 
       const shelves = scene.children.filter((item) => item.name === 'shelf');
 
-
       store.geometry.shelves = shelves
 
       store.parameters.id = shelves.map((item) => item.userData.id).filter(unique).sort((a, b) => a - b)
@@ -102,7 +95,12 @@ function init() {
       store.parameters.u = shelves.map((item) => item.userData.u).filter(unique).sort((a, b) => a - b)
       store.parameters.v = shelves.map((item) => item.userData.v).filter(unique).sort((a, b) => a - b)
 
-      store.current = shelves[0].userData
+      store.current = {
+        height: store.parameters.height[0],
+        u: store.parameters.u[0],
+        v: store.parameters.v[0],
+        width: store.parameters.width[0]
+      }
 
       shelves.forEach((item) => {
         if (item.name === 'shelf') {
@@ -158,8 +156,6 @@ function animate() {
 function render() {
   renderer.render(scene, camera);
 }
-
-
 
 
 function initMainScene() {
@@ -306,9 +302,6 @@ function updateScene() {
 
   // Add new shelf
   const shelf = getCurrentShelf()
-
-
-  console.log(shelf)
 
   shelf.material = defaultMaterial
   scene.add(shelf)
