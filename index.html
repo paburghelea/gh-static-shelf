@@ -10,55 +10,72 @@
 </head>
 
 <body>
-	<!-- Here the main rendering screen will be generated -->
 	<div id="container"></div>
 
 	<div class="container-dark" id="brand-panel">
-		<svg width="44" height="44" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M15.7115 38.9431L8.89872 33.3431C7.83946 32.4727 7.1796 31.2365 7.03199 29.8586C6.88439 28.4807 7.278 27.1294 8.12888 26.0495L21.0455 9.71855C23.9801 6.00388 29.3314 5.41968 32.9751 8.41148L43.9526 17.4311C45.0119 18.3015 45.6717 19.5378 45.8193 20.9157C45.9669 22.2935 45.5762 23.6449 44.7225 24.7247L33.7681 38.9343L32.1763 37.6567L43.1394 23.4354C43.6603 22.7774 43.8947 21.9631 43.8079 21.134C43.7211 20.3049 43.3217 19.5614 42.685 19.0391L31.7046 10.0195C30.3617 8.91601 28.6773 8.41148 26.9611 8.60031C25.2449 8.78914 23.7052 9.64479 22.6228 11.0138L9.70619 27.3477C9.19392 27.9968 8.9595 28.8112 9.04632 29.6403C9.13314 30.4693 9.53254 31.2129 10.1692 31.7351L16.9821 37.3322L15.7115 38.9402V38.9431Z" />
-			<path
-				d="M41.5246 38.7867L39.9473 37.4914L44.3001 31.9858C45.3593 30.6463 45.1509 28.6783 43.837 27.5984L43.5592 27.3683L44.8297 25.7603L45.1075 25.9904C47.2897 27.7843 47.6341 31.0564 45.8745 33.2811L41.5217 38.7867H41.5246Z" />
-			<path
-				d="M13.0433 33.1512L11.4659 31.856L23.2596 16.9383C24.3999 15.4955 26.0235 14.5926 27.8294 14.395C29.6354 14.1973 31.4095 14.7284 32.8247 15.8909L42.1323 23.5385L40.8618 25.1465L31.5542 17.4989C30.5615 16.6816 29.317 16.3098 28.0465 16.4485C26.7789 16.5872 25.6386 17.2215 24.8398 18.2335L13.0433 33.1512Z" />
-			<path
-				d="M16.8693 47.4996L10.0564 41.9025C7.87137 40.1086 7.52696 36.8365 9.28661 34.6118L10.8639 35.9071C9.80466 37.2466 10.013 39.2146 11.327 40.2945L18.1398 45.8915L16.8693 47.4996Z" />
+		<svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect x="32" y="32" width="20" height="20" rx="6" stroke="#0C44D3" stroke-width="5" />
+			<rect x="32" y="12" width="20" height="20" rx="6" stroke="#0C44D3" stroke-width="5" />
+			<rect x="12" y="32" width="20" height="20" rx="6" stroke="#0C44D3" stroke-width="5" />
+			<rect x="12" y="12" width="20" height="20" rx="6" stroke="#0C44D3" stroke-width="5" />
 		</svg>
-		Static Shelf
+		<span>
+			Static Shelf
+		</span>
+	</div>
+
+
+	<div class="container-dark" id="info-panel">
+		<div class="panel-title border-b">
+			Information
+		</div>
+		<div class="details-container">
+			<p>
+				This example showcases a basic static configurator that uses Grasshopper for geometry generation and Three.js for browser-based visualization. Use the 'Parameters' panel below to explore a range of predefined, statically generated configurations.</p>
+			<a class="link" href="https://github.com/paburghelea/gh-static-shelf">
+				Github
+			</a>
+		</div>
 	</div>
 
 
 	<div class="container-dark" id="detail-panel">
 		<div class="panel-title border-b">
-			Select Panel
+			Parameters
 		</div>
 		<div class="details-container">
 			<div class="option-value">
 				<label for="volume">Height</label>
-				<select id="height-dropdown" name="height" ></select>
+				<select id="height-dropdown" name="height"></select>
 			</div>
 			<div class="option-value">
 				<label for="volume">Width</label>
-				<select id="width-dropdown" name="width" ></select>
+				<select id="width-dropdown" name="width"></select>
 			</div>
 			<div class="option-value">
 				<label for="u">U</label>
-				<select id="u-dropdown" name="u" ></select>
+				<select id="u-dropdown" name="u"></select>
 			</div>
 			<div class="option-value">
 				<label for="v">V</label>
-				<select id="v-dropdown" name="v" ></select>
+				<select id="v-dropdown" name="v"></select>
 			</div>
 		</div>
 	</div>
 
 
-	<!-- these are the required scripts for the three.js scene -->
-	<script src="./js/three.min.js"></script>
-	<script src="./js/orbit-controls.js"></script>
+	<!-- this is how you import three js and orbit controls from the cdn -->
+	<script type="importmap">
+		{
+		  "imports": {
+			"three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
+			"three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/"
+		  }
+		}
+	</script>
 
 	<!-- this is your application js file -->
-	<script src="./js/app.js"></script>
+	<script type="module" src="./js/app.js"></script>
 </body>
 
 </html>
