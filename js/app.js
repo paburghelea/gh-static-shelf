@@ -4,6 +4,9 @@
 
 let camera, controls, scene, renderer;
 
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
 
 const store = {
   geometry: {
@@ -64,7 +67,6 @@ function getCurrentShelf() {
   console.log('Shelf not found')
   return store.geometry.shelves[0]
 }
-
 
 function init() {
 
@@ -143,8 +145,6 @@ function progressLog(message) {
   container.appendChild(progress)
 }
 
-
-
 function animate() {
 
   requestAnimationFrame(animate);
@@ -156,7 +156,6 @@ function animate() {
 function render() {
   renderer.render(scene, camera);
 }
-
 
 function initMainScene() {
   scene = new THREE.Scene();
@@ -175,7 +174,7 @@ function initMainScene() {
   camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.5, 800000);
   camera.position.set(-2000, 2000, -2000); // starting position of the camera
 
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true
   controls.dampingFactor = 0.1
   controls.screenSpacePanning = true;
@@ -184,7 +183,6 @@ function initMainScene() {
   controls.minDistance = 2000;
   controls.enablePan = false;
 }
-
 
 function initUIEvents() {
 
@@ -292,7 +290,6 @@ function initUIEvents() {
     }
   })
 }
-
 
 function updateScene() {
 
