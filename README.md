@@ -3,6 +3,8 @@
 This example showcases a basic static configurator that uses Grasshopper for geometry generation and Three.js for browser-based visualization. This example is simplified to be more accessible for beginners, and it is meant to be used as an aid to teaching Grasshopper for the Web as part of the UCL MArch design courses.
 
 
+![alt](assets/web-browser-ui.png "Screengrab of the app UI")
+
 
 # Setting up the environment
 
@@ -23,4 +25,4 @@ Before we start developing we first need to setup the following element on our m
 
 After installing those packages you will be able to run the Grasshopper scripts and open the code definitions. To run the web files I recommend using Live Server or any equivalen plugin. To use, simply right-click and `Open with Live Server`:
 
-![alt](assets/live-server-run.png "Photo")
+![alt](assets/live-server-run.png "Image of the VS Code command")
